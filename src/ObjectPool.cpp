@@ -38,10 +38,10 @@ void ObjectPool::remove(GameObject* object)
 
 void ObjectPool::clean()
 {
-	do {
+	while (objectList.size() > 0) {
 		GameObject* object = objectList.front();
 		objectList.pop_front();
 		object->clean();
 		delete object;
-	} while (objectList.size() > 0);
+	}
 }

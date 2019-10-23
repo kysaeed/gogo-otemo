@@ -4,6 +4,10 @@
 #include "GameObject.h"
 #include "ObjectPool.h"
 
+Scene::Scene()
+{
+	parent = NULL;
+}
 
 bool Scene::initialize(SDL_Renderer* pRenderer)
 {
@@ -12,12 +16,12 @@ bool Scene::initialize(SDL_Renderer* pRenderer)
 
 void Scene::clean()
 {
-	do {
+	while (children.size() > 0) {
 		GameObject* object = children.front();
 		children.pop_front();
 		object->clean();
 		delete object;
-	} while (children.size() > 0);
+	}
 }
 
 // void Scene::addEventListener(int event, GameObject* object, void (GameObject::*eventHandler)(int, GameObject*))

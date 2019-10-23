@@ -34,9 +34,9 @@ bool Layer::onFrame()
 
 void Layer::clean()
 {
-	do {
+	while (children.size() > 0) {
 		GameObject* object = children.front();
 		children.pop_front();
 		delete object;
-	} while (children.size() > 0);
+	}
 }

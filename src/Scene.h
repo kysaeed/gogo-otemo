@@ -13,10 +13,7 @@ class GameObject;
 class Scene : public GameObject
 {
 public:
-	Scene()
-	{
-		parent = NULL;
-	}
+	Scene();
 
 	virtual void clean();
 
