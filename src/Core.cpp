@@ -5,7 +5,6 @@
 #include "SceneMain.h"
 #include "EventReceiver.h"
 
-
 int Core::initializeCount = 0;
 SDL_Renderer * Core::pRenderer = NULL;
 SDL_Window * Core::pWindow = NULL;
@@ -14,10 +13,6 @@ Core * Core::game = NULL;
 Core::Core()
 {
 	currentScene = NULL;
-
-	EventReceiver a(NULL, NULL);
-	EventReceiver b(NULL, NULL);
-	a = b;
 }
 
 Core::~Core()
@@ -44,8 +39,11 @@ bool Core::initialize()
 		return false;
 	}
 
-	pWindow = SDL_CreateWindow("Go Go SDL", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1024, 768,
-							   SDL_WINDOW_SHOWN);
+
+
+	// int windowMode = SDL_WINDOW_SHOWN;
+	int windowMode = SDL_WINDOW_FULLSCREEN;
+	pWindow = SDL_CreateWindow("Go Go SDL", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1024, 768, windowMode);
 	if (pWindow == NULL) {
 		return false;
 	}

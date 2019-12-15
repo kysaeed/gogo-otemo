@@ -25,7 +25,7 @@ bool SceneMain::initialize(SDL_Renderer* pRenderer)
 
 	hero = new Hero();
 	hero->initialize(pRenderer);
-	hero->xxx(pRenderer, this);
+	hero->createEyeBeams(pRenderer, this);
 	attach(hero);
 
 	Sprite* sun = new Sprite();

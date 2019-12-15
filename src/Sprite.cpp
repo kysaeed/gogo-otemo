@@ -24,7 +24,7 @@ Sprite::~Sprite()
 	clean();
 }
 
-bool Sprite::loadImageFromFile(SDL_Renderer* pRenderer, std::string filename)
+bool Sprite::loadImageFromFile(SDL_Renderer* pRenderer, const std::string &filename)
 {
 	clean();
 
@@ -55,6 +55,11 @@ bool Sprite::loadImageFromFile(SDL_Renderer* pRenderer, std::string filename)
 
 bool Sprite::render(SDL_Renderer* pRenderer)
 {
+	return paint(pRenderer, rect.getX(), rect.getY());
+}
+
+bool Sprite::paint(SDL_Renderer* pRenderer, int x, int y)
+{
 	if (image == NULL) {
 		return true;
 	}
@@ -63,7 +68,7 @@ bool Sprite::render(SDL_Renderer* pRenderer)
 	}
 
 	// Set rendering space and render to screen
-	SDL_Rect renderQuad = { (int) rect.getX(), (int) rect.getY(), rect.getWidth(), rect.getHeight() };
+	SDL_Rect renderQuad = { x, y, rect.getWidth(), rect.getHeight() };
 
 	// SDL_Rect* clip = NULL;
 	SDL_Rect clip = { 0 };

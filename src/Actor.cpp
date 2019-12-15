@@ -10,9 +10,6 @@ Actor::Actor()
 	// y = 128;
 
 
-	frameCount = 0;
-	animationCount = 0;
-
 	state = none;
 
 	setClipSize(DefaultWidth, DefaultHeight);
@@ -33,13 +30,15 @@ bool Actor::onFrame()
 	return true;
 }
 
-// bool Actor::render(SDL_Renderer* pRenderer)
-// {
-//   sprite->setPosition(x, y);
-//   sprite->render(pRenderer);
-//
-//   return true;
-// }
+bool Actor::render(SDL_Renderer* pRenderer)
+{
+	if (!animation.isNull()) {
+		AnimationFrame frame = animation.getCurrentFrame();
+		return paint(pRenderer, rect.getX() + frame.getX(), rect.getY() + frame.getY());
+	}
+
+	return paint(pRenderer, rect.getX(), rect.getY());
+}
 
 // void Actor::clean()
 // {

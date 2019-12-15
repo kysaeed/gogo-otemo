@@ -15,14 +15,10 @@ public:
 
 	virtual bool onFrame();
 
-	void xxx(SDL_Renderer* pRenderer, SceneMain* sceneMain);
+	void createEyeBeams(SDL_Renderer* pRenderer, SceneMain* sceneMain);
 
-	// inline void setMainScene(SceneMain* sm) {
-	//   this->sm = sm;
-	// }
 protected:
 	ObjectPool beamPool;
-	// SceneMain* sm;
 };
 
 

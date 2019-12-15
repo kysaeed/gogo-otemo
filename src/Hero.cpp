@@ -6,9 +6,10 @@
 #include "SceneMain.h"
 #include "Vector.h"
 
+#include <iostream>
+
 Hero::Hero()
 {
-	// sm = NULL;
 }
 
 bool Hero::initialize(SDL_Renderer* pRenderer)
@@ -19,12 +20,12 @@ bool Hero::initialize(SDL_Renderer* pRenderer)
 	getRect()->setPosition(70, 400);
 	setClipSize(128, 128);
 
-
+	animation.load("./data/otemo.oan");
 
 	return isInitilied;
 }
 
-void Hero::xxx(SDL_Renderer* pRenderer, SceneMain* sceneMain)
+void Hero::createEyeBeams(SDL_Renderer* pRenderer, SceneMain* sceneMain)
 {
 	for (int i = 0; i < 3; i++) {
 		EyeBeam* e = new EyeBeam();
@@ -87,16 +88,10 @@ bool Hero::onFrame()
 		state = none;
 	}
 
-	frameCount++;
-	if (frameCount > 3) {
-		frameCount = 0;
-		animationCount++;
-		if (animationCount > 2) {
-			animationCount = 0;
-		}
-	}
-
-	setClipIndex(animationCount);
+	AnimationFrame frame = animation.getCurrentFrame();
+	setClipIndex(frame.getCell());
+	// std::cout << "cell:" << frame.getCell() << " frameCount:" << frame.getFrameCount() << std::endl;
+	animation.moveNextFrame();
 
 	return true;
 }

@@ -18,7 +18,7 @@ public:
 		return true;
 	}
 
-	bool loadImageFromFile(SDL_Renderer* pRenderer, std::string filename);
+	bool loadImageFromFile(SDL_Renderer* pRenderer, const std::string &filename);
 	virtual bool render(SDL_Renderer* pRenderer);
 
 	inline int getImageWidth()
@@ -62,6 +62,8 @@ public:
 	}
 
 protected:
+	bool paint(SDL_Renderer* pRenderer, int x, int y);
+
 	Rect rect;
 
 	// int x;
