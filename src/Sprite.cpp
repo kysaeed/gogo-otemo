@@ -72,8 +72,8 @@ bool Sprite::paint(SDL_Renderer* pRenderer, int x, int y)
 
 	// SDL_Rect* clip = NULL;
 	SDL_Rect clip = { 0 };
-	clip.x = (rect.getWidth() * (clipIndex % clipCountW));
-	clip.y = (rect.getHeight() * (clipIndex / clipCountW));
+	clip.x = rect.getWidth() * (clipIndex % clipCountW);
+	clip.y = rect.getHeight() * static_cast <int>(clipIndex / clipCountW);
 	clip.w = rect.getWidth();
 	clip.h = rect.getHeight();
 	SDL_RenderCopy(pRenderer, image, &clip, &renderQuad);

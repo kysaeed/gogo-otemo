@@ -9,6 +9,44 @@ Animation::Animation()
 	currentFrameIterator = frames.begin();
 }
 
+void Animation::reset()
+{
+	currentFrameIterator = frames.begin();
+}
+
+void Animation::read(SDL_RWops* file)
+{
+	const int maxNameLength = 1024;
+
+	int32_t nameByteCount = 0;
+	SDL_RWread(file, &nameByteCount, sizeof(nameByteCount), 1);
+
+	std::cout << "name len=" << nameByteCount << std::endl;
+	char nameBuffer[maxNameLength];
+	if (nameByteCount > (maxNameLength - 1)) {
+		nameByteCount = (maxNameLength - 1);
+	}
+
+	SDL_RWread(file, nameBuffer, sizeof(char), nameByteCount);
+	nameBuffer[nameByteCount + 1] = '\0';
+
+	this->name = std::string(nameBuffer);
+
+	std::cout << "----- " << name << " -----" << std::endl;
+
+	int32_t count = 0;
+	SDL_RWread(file, &count, sizeof(count), 1);
+	std::cout << "    frame-count: " << count << std::endl;
+
+	frames.clear();
+	for (int i = 0; i < count; i++) {
+		AnimationFrame frame = readFrame(file);
+		frames.push_back(frame);
+	}
+
+	currentFrameIterator = frames.begin();
+}
+
 bool Animation::load(const std::string &filename)
 {
 	SDL_RWops* file = SDL_RWFromFile(filename.c_str(), "r");
@@ -16,25 +54,16 @@ bool Animation::load(const std::string &filename)
 		return false;
 	}
 
-	int32_t count = 0;
-	SDL_RWread(file, &count, 4, 1);
-	// std::cout << count << std::endl;
-
-	for (int i = 0; i < count; i++) {
-		AnimationFrame frame = readFrame(file);
-		frames.push_back(frame);
-	}
-
-	currentFrameIterator = frames.begin();
+	read(file);
 
 	SDL_RWclose(file);
 	return true;
 }
 
-void Animation::moveNextFrame()
+bool Animation::moveNextFrame()
 {
 	if (frames.size() <= 1) {
-		return;
+		return true;
 	}
 
 	counter++;
@@ -43,8 +72,11 @@ void Animation::moveNextFrame()
 		currentFrameIterator++;
 		if (currentFrameIterator == frames.end()) {
 			currentFrameIterator = frames.begin();
+			return true;
 		}
 	}
+
+	return false;
 }
 
 AnimationFrame Animation::readFrame(SDL_RWops* file)

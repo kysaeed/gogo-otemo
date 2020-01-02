@@ -12,6 +12,22 @@ bool SceneMain::initialize(SDL_Renderer* pRenderer)
 {
 	Scene::initialize(pRenderer);
 
+	for (int i = 0; i < 2; i++) {
+		pFarBg[i] = new Sprite();
+		pFarBg[i]->initialize(pRenderer);
+		pFarBg[i]->loadImageFromFile(pRenderer, "./data/far_bg.png");
+		attach(pFarBg[i]);
+	}
+	pFarBg[0]->getRect()->setPosition(0, 4);
+	pFarBg[1]->getRect()->setPosition(1024, 4);
+
+
+	Sprite* sun = new Sprite();
+	sun->loadImageFromFile(pRenderer, "./data/sun.png");
+	sun->getRect()->setPosition(80, 24);
+	attach(sun);
+
+
 
 	Bg* pBg = new Bg();
 	pBg->initialize(pRenderer);
@@ -28,10 +44,6 @@ bool SceneMain::initialize(SDL_Renderer* pRenderer)
 	hero->createEyeBeams(pRenderer, this);
 	attach(hero);
 
-	Sprite* sun = new Sprite();
-	sun->loadImageFromFile(pRenderer, "./data/sun.png");
-	sun->getRect()->setPosition(100, 40);
-	attach(sun);
 
 
 	{
@@ -77,6 +89,14 @@ bool SceneMain::onFrame()
 		}
 	}
 
+	for (int i = 0; i < 2; i++) {
+		int x = pFarBg[i]->getRect()->getX();
+		x--;
+		if (x <= -1024) {
+			x = 1024;
+		}
+		pFarBg[i]->getRect()->setPosition(x, 4);
+	}
 
 	return true;
 }

@@ -41,9 +41,10 @@ bool Core::initialize()
 
 
 
-	// int windowMode = SDL_WINDOW_SHOWN;
-	int windowMode = SDL_WINDOW_FULLSCREEN;
-	pWindow = SDL_CreateWindow("Go Go SDL", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1024, 768, windowMode);
+	int windowMode = SDL_WINDOW_SHOWN;
+	// int windowMode = SDL_WINDOW_FULLSCREEN;
+	// int windowMode = SDL_WINDOW_FULLSCREEN_DESKTOP;
+	pWindow = SDL_CreateWindow("Go Go", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1024, 768, windowMode);
 	if (pWindow == NULL) {
 		return false;
 	}

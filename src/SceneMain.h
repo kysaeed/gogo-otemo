@@ -22,6 +22,7 @@ protected:
 	Hero* hero;
 	std::list <Cat *> cats;
 	std::list <EyeBeam *> eyeBeams;
+	Sprite* pFarBg[2];
 };
 
 

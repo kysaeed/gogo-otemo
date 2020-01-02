@@ -1,5 +1,7 @@
 #include "Cat.h"
 
+#include <iostream>
+
 Cat::Cat()
 {
 	direction = -1;
@@ -12,6 +14,9 @@ bool Cat::initialize(SDL_Renderer* pRenderer)
 		return false;
 	}
 
+	std::cout << "********** CAT **************" << std::endl;
+	animations.load("./data/koneko.oan");
+
 	setClipSize(128, 128);
 	isDeadState = false;
 
@@ -20,10 +25,10 @@ bool Cat::initialize(SDL_Renderer* pRenderer)
 
 bool Cat::onFrame()
 {
-	if (++frameCount > 4) {
-		frameCount = 0;
-		setClipIndex((getClipIndex() + 1) % 2);
-	}
+	// if (++frameCount > 4) {
+	// 	frameCount = 0;
+	// 	setClipIndex((getClipIndex() + 1) % 2);
+	// }
 
 	int x = getRect()->getX();
 
@@ -38,5 +43,5 @@ bool Cat::onFrame()
 
 	getRect()->setX(x);
 
-	return true;
+	return Actor::onFrame();
 }

@@ -14,6 +14,7 @@ public:
 	virtual bool initialize(SDL_Renderer* pRenderer);
 
 	virtual bool onFrame();
+	virtual void onAnimationEnd(int animationNumber);
 
 	void createEyeBeams(SDL_Renderer* pRenderer, SceneMain* sceneMain);
 

@@ -20,7 +20,8 @@ bool Hero::initialize(SDL_Renderer* pRenderer)
 	getRect()->setPosition(70, 400);
 	setClipSize(128, 128);
 
-	animation.load("./data/otemo.oan");
+	std::cout << "********** HERO **************" << std::endl;
+	animations.load("./data/otemo.oan");
 
 	return isInitilied;
 }
@@ -80,18 +81,26 @@ bool Hero::onFrame()
 
 			Core::getInstance()->gatCurrentScene()->attach(e);
 		}
+		animations.setCurrentAnimationNumber(0);
+		animations.getCurrentAnimation().reset();
 	}
 
+	if (Pad::getInstance()->getTrigger() & Pad::ButtonB) {
+		animations.setCurrentAnimationNumber(1);
+		animations.getCurrentAnimation().reset();
+	}
 	if (isMoved) {
 		state = move;
 	} else {
 		state = none;
 	}
 
-	AnimationFrame frame = animation.getCurrentFrame();
-	setClipIndex(frame.getCell());
-	// std::cout << "cell:" << frame.getCell() << " frameCount:" << frame.getFrameCount() << std::endl;
-	animation.moveNextFrame();
+	return Actor::onFrame();
+}
 
-	return true;
+void Hero::onAnimationEnd(int animationNumber)
+{
+	if (animationNumber == 1) {
+		animations.setCurrentAnimationNumber(0);
+	}
 }

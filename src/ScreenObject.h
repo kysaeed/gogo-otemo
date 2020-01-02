@@ -6,12 +6,14 @@
 class ScreenObject : public GameObject
 {
 public:
-  ScreenObject();
-  virtual bool intersect(ScreenObject* other);
+	ScreenObject();
+	virtual bool intersect(ScreenObject* other);
 
-  virtual Rect* getRect() {
-    return NULL;
-  };
-
+	virtual Rect *getRect()
+	{
+		return NULL;
+	}
 };
+
+
 #endif

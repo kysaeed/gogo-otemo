@@ -1,14 +1,17 @@
 #ifndef __ACOTR_H__
 #define __ACOTR_H__
 
-#include "GameObject.h"
-#include "Sprite.h"
 #include <string>
+// #include <list>
+#include <vector>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_filesystem.h>
 
+#include "GameObject.h"
+#include "Sprite.h"
 #include "Animation.h"
+#include "AnimationTable.h"
 
 
 class Actor : public Sprite
@@ -19,6 +22,7 @@ public:
 
 	virtual bool initialize(SDL_Renderer* pRenderer);
 	virtual bool onFrame();
+	virtual void onAnimationEnd(int animationNumber);
 	virtual bool render(SDL_Renderer* pRenderer);
 
 	virtual bool loadAnimationFile(const std::string &filename)
@@ -38,7 +42,8 @@ public:
 
 	// todo:
 protected:
-	Animation animation;
+	// Animation animation;
+	AnimationTable animations;
 };
 
 
