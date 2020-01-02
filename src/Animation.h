@@ -18,9 +18,9 @@ public:
 
 	void reset();
 
-	inline AnimationFrame getCurrentFrame() const
+	inline const AnimationFrame&getCurrentFrame() const
 	{
-		return *currentFrameIterator;
+		return frames[index];
 	}
 
 	bool moveNextFrame();
@@ -36,12 +36,12 @@ public:
 	}
 
 protected:
-	std::string name;
-	int counter;
 	AnimationFrame readFrame(SDL_RWops* file);
 
+	std::string name;
 	std::vector <AnimationFrame> frames;
-	std::vector <AnimationFrame>::iterator currentFrameIterator;
+	int index;
+	int counter;
 };
 
 

@@ -5,13 +5,14 @@
 
 Animation::Animation()
 {
+	index = 0;
 	counter = 0;
-	currentFrameIterator = frames.begin();
 }
 
 void Animation::reset()
 {
-	currentFrameIterator = frames.begin();
+	index = 0;
+	counter = 0;
 }
 
 void Animation::read(SDL_RWops* file)
@@ -44,8 +45,7 @@ void Animation::read(SDL_RWops* file)
 		AnimationFrame frame = readFrame(file);
 		frames.push_back(frame);
 	}
-
-	currentFrameIterator = frames.begin();
+	index = 0;
 }
 
 bool Animation::load(const std::string &filename)
@@ -63,16 +63,17 @@ bool Animation::load(const std::string &filename)
 
 bool Animation::moveNextFrame()
 {
-	if (frames.size() <= 1) {
+	if (frames.size() <= 0) {
 		return true;
 	}
 
 	counter++;
-	if (counter >= (*currentFrameIterator).getFrameCount()) {
+	if (counter >= frames[index].getFrameCount()) {
 		counter = 0;
-		currentFrameIterator++;
-		if (currentFrameIterator == frames.end()) {
-			currentFrameIterator = frames.begin();
+		index++;
+		if (index >= frames.size()) {
+			index = 0;
+			// currentFrameIterator = frames.begin();
 			return true;
 		}
 	}
