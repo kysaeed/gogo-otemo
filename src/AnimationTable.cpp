@@ -33,14 +33,12 @@ bool AnimationTable::load(const std::string &filename)
 		Animation animation;
 		animation.read(file);
 		animations.push_back(animation);
-		std::cout << "      -> read-frame=" << animation.frames.size() << std::endl;
 	}
 	SDL_RWclose(file);
 
 	std::cout << "---------------" << std::endl;
 	for (int i = 0; i < count; i++) {
 		setCurrentAnimationNumber(i);
-		std::cout << i << " : f-count = " << getCurrentAnimation().frames.size() << std::endl;
 		getCurrentAnimation().reset();
 	}
 	setCurrentAnimationNumber(0);

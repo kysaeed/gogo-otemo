@@ -2,7 +2,7 @@
 #define __ANIMATION_H__
 
 #include <string>
-#include <list>
+#include <vector>
 
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_filesystem.h"
@@ -35,13 +35,13 @@ public:
 		return frames.size();
 	}
 
-	std::list <AnimationFrame> frames;
 protected:
 	std::string name;
 	int counter;
 	AnimationFrame readFrame(SDL_RWops* file);
 
-	std::list <AnimationFrame>::iterator currentFrameIterator;
+	std::vector <AnimationFrame> frames;
+	std::vector <AnimationFrame>::iterator currentFrameIterator;
 };
 
 

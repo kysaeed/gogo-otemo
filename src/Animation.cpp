@@ -39,6 +39,7 @@ void Animation::read(SDL_RWops* file)
 	std::cout << "    frame-count: " << count << std::endl;
 
 	frames.clear();
+	frames.reserve(count);
 	for (int i = 0; i < count; i++) {
 		AnimationFrame frame = readFrame(file);
 		frames.push_back(frame);
