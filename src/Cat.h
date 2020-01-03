@@ -10,7 +10,9 @@ public:
 	virtual bool initialize(SDL_Renderer* pRenderer);
 	virtual bool onFrame();
 
-	bool isDead()
+	void kill();
+
+	bool isDead() const
 	{
 		return isDeadState;
 	}
@@ -21,7 +23,6 @@ public:
 	}
 
 protected:
-	int hp;
 	int direction;
 	int frameCount;
 

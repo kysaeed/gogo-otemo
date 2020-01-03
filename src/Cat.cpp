@@ -20,9 +20,16 @@ bool Cat::initialize(SDL_Renderer* pRenderer)
 	setClipSize(128, 128);
 	isDeadState = false;
 
-	boudingBox = Rect(30, 30, 30, 30);
+	boudingBox = Rect(44, 20, 37, 64);
 
 	return true;
+}
+
+void Cat::kill()
+{
+	animations.setCurrentAnimationNumber(1);
+	setDead(true);
+	// setDead(true);
 }
 
 bool Cat::onFrame()
@@ -32,18 +39,30 @@ bool Cat::onFrame()
 	// 	setClipIndex((getClipIndex() + 1) % 2);
 	// }
 
-	int x = getRect()->getX();
+	int s = animations.getCurrentAnimationNumber();
 
-	x += (direction * 3);
-	if (x < 500) {
-		x = 500;
-		direction = -direction;
-	} else if (x > 990) {
-		x = 990;
-		direction = -direction;
+	if (s == 0) {
+		int x = getRect()->getX();
+		x += (direction * 3);
+		if (x < 500) {
+			x = 500;
+			direction = -direction;
+		} else if (x > 990) {
+			x = 990;
+			direction = -direction;
+		}
+
+		getRect()->setX(x);
 	}
+	if (s == 1) {
+		int x = getRect()->getX();
+		int y = getRect()->getY();
 
-	getRect()->setX(x);
+		x += 2;
+		y += 4;
+
+		getRect()->setPosition(x, y);
+	}
 
 	return Actor::onFrame();
 }

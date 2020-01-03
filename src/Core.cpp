@@ -39,6 +39,9 @@ bool Core::initialize()
 		return false;
 	}
 
+	if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
+		return false;
+	}
 
 
 	int windowMode = SDL_WINDOW_SHOWN;
@@ -55,10 +58,6 @@ bool Core::initialize()
 	}
 
 	SDL_SetRenderDrawColor(pRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-
-	if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
-		return false;
-	}
 
 	initializeCount++;
 	return true;
