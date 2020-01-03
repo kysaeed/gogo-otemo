@@ -9,21 +9,42 @@ Rect::Rect()
 	height = 0;
 }
 
+Rect::Rect(int x, int y, int w, int h)
+{
+	this->x = x;
+	this->y = y;
+	this->width = w;
+	this->height = h;
+}
+
+Rect Rect::getAppleidBodingBoxRect(const Rect* boundingBox)
+{
+	if (boundingBox == NULL) {
+		return *this;
+	}
+
+	return Rect(
+		x + boundingBox->getX(),
+		y + boundingBox->getY(),
+		boundingBox->getWidth(),
+		boundingBox->getHeight());
+}
+
 bool Rect::intersect(Rect* other) const
 {
-	if (x > (other->getX() + other->getWidth())) {
+	if (x > other->getRight()) {
 		return false;
 	}
 
-	if ((x + width) < other->getX()) {
+	if (getRight() < other->getX()) {
 		return false;
 	}
 
-	if (y > (other->getY() + other->getHeight())) {
+	if (y > other->getBottom()) {
 		return false;
 	}
 
-	if ((y + height) < other->getY()) {
+	if (getBottom() < other->getY()) {
 		return false;
 	}
 

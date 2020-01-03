@@ -79,7 +79,7 @@ bool SceneMain::onFrame()
 
 	for (std::list <EyeBeam *>::iterator b = eyeBeams.begin(); b != eyeBeams.end(); b++) {
 		for (std::list <Cat *>::iterator c = cats.begin(); c != cats.end(); c++) {
-			if ((*b)->getRect()->intersect((*c)->getRect())) {
+			if ((*b)->intersect((*c))) {
 				// std::cout << "HIT!" << std::endl;
 				this->detach(*c);
 				c = cats.erase(c);

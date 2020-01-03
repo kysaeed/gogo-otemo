@@ -41,31 +41,21 @@ void Hero::createEyeBeams(SDL_Renderer* pRenderer, SceneMain* sceneMain)
 
 bool Hero::onFrame()
 {
-	bool isMoved = false;
-
-	// float sin45 = 0.70710678118;
-	// const float step = 4.0;
-
 	Vector v;
 
 	if (Pad::getInstance()->getNormal() & Pad::Left) {
-		// getRect()->moveX(-4.0);
 		v.setX(-1.0);
-		isMoved = true;
 	}
 
 	if (Pad::getInstance()->getNormal() & Pad::Right) {
 		v.setX(1.0);
-		isMoved = true;
 	}
 
 	if (Pad::getInstance()->getNormal() & Pad::Up) {
 		v.setY(-1.0);
-		isMoved = true;
 	}
 	if (Pad::getInstance()->getNormal() & Pad::Down) {
 		v.setY(1.0);
-		isMoved = true;
 	}
 
 	v.normalize();
@@ -81,18 +71,11 @@ bool Hero::onFrame()
 
 			Core::getInstance()->gatCurrentScene()->attach(e);
 		}
-		animations.setCurrentAnimationNumber(0);
-		animations.getCurrentAnimation().reset();
 	}
 
 	if (Pad::getInstance()->getTrigger() & Pad::ButtonB) {
 		animations.setCurrentAnimationNumber(1);
 		animations.getCurrentAnimation().reset();
-	}
-	if (isMoved) {
-		state = move;
-	} else {
-		state = none;
 	}
 
 	return Actor::onFrame();

@@ -20,6 +20,8 @@ bool Cat::initialize(SDL_Renderer* pRenderer)
 	setClipSize(128, 128);
 	isDeadState = false;
 
+	boudingBox = Rect(30, 30, 30, 30);
+
 	return true;
 }
 

@@ -45,8 +45,8 @@ bool Sprite::loadImageFromFile(SDL_Renderer* pRenderer, const std::string &filen
 	setClipSize(imageWidth, imageHeight);
 
 	clipIndex = 0;
-	rect.setWidth(imageWidth);
-	rect.setHeight(imageHeight);
+	rect.setSize(imageWidth, imageHeight);
+	boudingBox.setSize(imageWidth, imageHeight);
 
 	SDL_FreeSurface(loadedSurface);
 
@@ -122,4 +122,5 @@ void Sprite::setClipSize(int w, int h)
 		clipCountW = (imageWidth / rect.getWidth());
 		clipCountH = (imageHeight / rect.getHeight());
 	}
+	boudingBox.setSize(rect.getWidth(), rect.getHeight());
 }

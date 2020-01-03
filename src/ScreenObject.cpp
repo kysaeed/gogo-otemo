@@ -14,7 +14,10 @@ bool ScreenObject::intersect(ScreenObject* other)
 		return false;
 	}
 
-	if (getRect()->intersect(other->getRect())) {
+	Rect rect = getRect()->getAppleidBodingBoxRect(getBoundingBox());
+	Rect otherRect = other->getRect()->getAppleidBodingBoxRect(other->getBoundingBox());
+
+	if (rect.intersect(&otherRect)) {
 		return true;
 	}
 	return false;

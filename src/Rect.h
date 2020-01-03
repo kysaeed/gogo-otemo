@@ -1,15 +1,25 @@
 #ifndef __RECT_H__
 #define __RECT_H__
 
+#include <iostream>
+
 class Rect
 {
 public:
 	Rect();
 
+	Rect(int x, int y, int w=0, int h=0);
+
 	inline void setPosition(float x, float y)
 	{
 		this->x = x;
 		this->y = y;
+	}
+
+	inline void setSize(float w, float h)
+	{
+		this->width = w;
+		this->height = h;
 	}
 
 	inline void setX(float x)
@@ -32,10 +42,24 @@ public:
 		return y;
 	}
 
-	inline void setSize(int w, int h)
+	inline float getTop() const
 	{
-		this->width = w;
-		this->height = h;
+		return y;
+	}
+
+	inline float getLeft() const
+	{
+		return x;
+	}
+
+	inline float getRight() const
+	{
+		return x + width;
+	}
+
+	inline float getBottom() const
+	{
+		return y + height;
 	}
 
 	inline void move(float x, float y)
@@ -75,6 +99,8 @@ public:
 	}
 
 	virtual bool intersect(Rect* otehr) const;
+
+	Rect getAppleidBodingBoxRect(const Rect* boundingBox);
 
 protected:
 	float x;

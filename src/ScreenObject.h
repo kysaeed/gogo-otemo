@@ -13,6 +13,11 @@ public:
 	{
 		return NULL;
 	}
+
+	virtual Rect *getBoundingBox()
+	{
+		return NULL;
+	}
 };
 
 

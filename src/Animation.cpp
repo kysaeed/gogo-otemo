@@ -21,8 +21,8 @@ void Animation::read(SDL_RWops* file)
 
 	int32_t nameByteCount = 0;
 	SDL_RWread(file, &nameByteCount, sizeof(nameByteCount), 1);
+	// std::cout << "name len=" << nameByteCount << std::endl;
 
-	std::cout << "name len=" << nameByteCount << std::endl;
 	char nameBuffer[maxNameLength];
 	if (nameByteCount > (maxNameLength - 1)) {
 		nameByteCount = (maxNameLength - 1);
@@ -37,7 +37,7 @@ void Animation::read(SDL_RWops* file)
 
 	int32_t count = 0;
 	SDL_RWread(file, &count, sizeof(count), 1);
-	std::cout << "    frame-count: " << count << std::endl;
+	std::cout << " * frame-count: " << count << std::endl;
 
 	frames.clear();
 	frames.reserve(count);
