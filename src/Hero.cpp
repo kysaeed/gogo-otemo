@@ -21,7 +21,7 @@ bool Hero::initialize(SDL_Renderer* pRenderer)
 	setClipSize(128, 128);
 
 	std::cout << "********** HERO **************" << std::endl;
-	animations.load("./data/otemo.oan");
+	load("./data/otemo.oan");
 
 	return isInitilied;
 }

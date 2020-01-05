@@ -8,7 +8,7 @@ class Rect
 public:
 	Rect();
 
-	Rect(int x, int y, int w=0, int h=0);
+	Rect(float x, float y, int w=0, int h=0);
 
 	inline void setPosition(float x, float y)
 	{

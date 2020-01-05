@@ -1,6 +1,9 @@
 #ifndef __CAT_H__
 #define __CAT_H__
 
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_filesystem.h"
+
 #include "Actor.h"
 
 class Cat : public Actor

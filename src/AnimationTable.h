@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_filesystem.h"
 
@@ -12,7 +13,7 @@ class AnimationTable
 {
 public:
 	AnimationTable();
-	bool load(const std::string &filename);
+	void read(SDL_RWops* file);
 
 	inline int getCurrentAnimationNumber() const
 	{

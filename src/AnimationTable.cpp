@@ -13,14 +13,8 @@ Animation &AnimationTable::getCurrentAnimation()
 	return animations[currentAnimationIndex];
 }
 
-bool AnimationTable::load(const std::string &filename)
+void AnimationTable::read(SDL_RWops* file)
 {
-	SDL_RWops* file = SDL_RWFromFile(filename.c_str(), "r");
-
-	if (file == nullptr) {
-		return false;
-	}
-
 	animations.clear();
 
 	int32_t count = 0;
@@ -42,8 +36,6 @@ bool AnimationTable::load(const std::string &filename)
 		getCurrentAnimation().reset();
 	}
 	setCurrentAnimationNumber(0);
-
-	return true;
 }
 
 void AnimationTable::setCurrentAnimationNumber(int number)

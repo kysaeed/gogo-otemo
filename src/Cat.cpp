@@ -15,12 +15,14 @@ bool Cat::initialize(SDL_Renderer* pRenderer)
 	}
 
 	std::cout << "********** CAT **************" << std::endl;
-	animations.load("./data/koneko.oan");
+
 
 	setClipSize(128, 128);
+	// boudingBox = Rect(44, 20, 37, 64);
+	load("./data/koneko.oan");
+
 	isDeadState = false;
 
-	boudingBox = Rect(44, 20, 37, 64);
 
 	return true;
 }
@@ -54,14 +56,9 @@ bool Cat::onFrame()
 
 		getRect()->setX(x);
 	}
+
 	if (s == 1) {
-		int x = getRect()->getX();
-		int y = getRect()->getY();
-
-		x += 2;
-		y += 4;
-
-		getRect()->setPosition(x, y);
+		getRect()->move(3, 8);
 	}
 
 	return Actor::onFrame();

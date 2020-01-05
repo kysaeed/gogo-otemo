@@ -9,7 +9,7 @@ Rect::Rect()
 	height = 0;
 }
 
-Rect::Rect(int x, int y, int w, int h)
+Rect::Rect(float x, float y, int w, int h)
 {
 	this->x = x;
 	this->y = y;

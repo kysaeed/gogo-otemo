@@ -55,6 +55,25 @@ bool Actor::render(SDL_Renderer* pRenderer)
 	return paint(pRenderer, rect.getX(), rect.getY());
 }
 
+bool Actor::load(const std::string &filename)
+{
+	SDL_RWops* file = SDL_RWFromFile(filename.c_str(), "r");
+	if (file == nullptr) {
+		return false;
+	}
+
+	int32_t r[4];
+	SDL_RWread(file, r, sizeof(int32_t), 4);
+	boudingBox = Rect(r[0], r[1], r[2], r[3]);
+
+	std::cout << "bouding-box : (" << boudingBox.getX() << ", " << boudingBox.getY() << ") " <<
+		boudingBox.getWidth() << "x" << boudingBox.getHeight() << std::endl;
+
+	animations.read(file);
+
+	return true;
+}
+
 // void Actor::clean()
 // {
 //   sprite->clean();

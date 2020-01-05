@@ -24,6 +24,7 @@ public:
 	virtual bool onFrame();
 	virtual void onAnimationEnd(int animationNumber);
 	virtual bool render(SDL_Renderer* pRenderer);
+	bool load(const std::string &filename);
 
 	virtual bool loadAnimationFile(const std::string &filename)
 	{
