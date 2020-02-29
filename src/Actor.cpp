@@ -28,13 +28,16 @@ bool Actor::initialize(SDL_Renderer* pRenderer)
 
 bool Actor::onFrame()
 {
-	if (!animations.getCurrentAnimation().isNull()) {
-		AnimationFrame frame = animations.getCurrentAnimation().getCurrentFrame();
-		setClipIndex(frame.getCell());
-		// std::cout << "cell:" << frame.getCell() << " frameCount:" << frame.getFrameCount() << std::endl;
-		if (animations.getCurrentAnimation().moveNextFrame()) {
-			onAnimationEnd(animations.getCurrentAnimationNumber());
-		}
+	if (animations.getCurrentAnimation().isNull()) {
+		onAnimationEnd(animations.getCurrentAnimationNumber());
+		return true;
+	}
+
+	AnimationFrame frame = animations.getCurrentAnimation().getCurrentFrame();
+	setClipIndex(frame.getCell());
+	// std::cout << "cell:" << frame.getCell() << " frameCount:" << frame.getFrameCount() << std::endl;
+	if (animations.getCurrentAnimation().moveNextFrame()) {
+		onAnimationEnd(animations.getCurrentAnimationNumber());
 	}
 
 	return true;
@@ -68,6 +71,24 @@ bool Actor::load(const std::string &filename)
 
 	std::cout << "bouding-box : (" << boudingBox.getX() << ", " << boudingBox.getY() << ") " <<
 		boudingBox.getWidth() << "x" << boudingBox.getHeight() << std::endl;
+
+	int32_t cellCount = 1;
+	SDL_RWread(file, &cellCount, sizeof(int32_t), 1);
+
+	std::cout << "cell-count : " << cellCount << std::endl;
+
+	for (int i =  0; i < cellCount; i++) {
+		SDL_RWread(file, r, sizeof(int32_t), 4);
+
+		int32_t c = 0;
+		SDL_RWread(file, &c, sizeof(int32_t), 1);
+		std::cout << "\tpoint-count = " << c << std::endl;
+
+		for (int j = 0; j < c; j++) {
+			int32_t filler[3] = { 0 };
+			SDL_RWread(file, filler, sizeof(int32_t), 3);
+		}
+	}
 
 	animations.read(file);
 
