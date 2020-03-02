@@ -17,7 +17,7 @@ bool EyeBeam::initialize(SDL_Renderer* pRenderer)
 	SDL_SetTextureBlendMode(image, SDL_BLENDMODE_ADD);
 	SDL_SetTextureAlphaMod(image, 0xE0);
 
-	boudingBox = Rect(3, 27, 57, 10);
+	boundingBox = Rect(3, 27, 57, 10);
 
 	return true;
 }

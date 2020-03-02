@@ -67,27 +67,21 @@ bool Actor::load(const std::string &filename)
 
 	int32_t r[4];
 	SDL_RWread(file, r, sizeof(int32_t), 4);
-	boudingBox = Rect(r[0], r[1], r[2], r[3]);
+	boundingBox = Rect(r[0], r[1], r[2], r[3]);
 
-	std::cout << "bouding-box : (" << boudingBox.getX() << ", " << boudingBox.getY() << ") " <<
-		boudingBox.getWidth() << "x" << boudingBox.getHeight() << std::endl;
+	std::cout << "bouding-box : (" << boundingBox.getX() << ", " << boundingBox.getY() << ") " <<
+		boundingBox.getWidth() << "x" << boundingBox.getHeight() << std::endl;
 
 	int32_t cellCount = 1;
 	SDL_RWread(file, &cellCount, sizeof(int32_t), 1);
 
 	std::cout << "cell-count : " << cellCount << std::endl;
 
+	cells.resize(cellCount);
 	for (int i =  0; i < cellCount; i++) {
-		SDL_RWread(file, r, sizeof(int32_t), 4);
-
-		int32_t c = 0;
-		SDL_RWread(file, &c, sizeof(int32_t), 1);
-		std::cout << "\tpoint-count = " << c << std::endl;
-
-		for (int j = 0; j < c; j++) {
-			int32_t filler[3] = { 0 };
-			SDL_RWread(file, filler, sizeof(int32_t), 3);
-		}
+		ActorImageCellData* cell = new ActorImageCellData();
+		cell->read(file);
+		cells[i] = cell;
 	}
 
 	animations.read(file);

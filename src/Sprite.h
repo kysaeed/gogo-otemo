@@ -63,14 +63,14 @@ public:
 
 	virtual Rect *getBoundingBox()
 	{
-		return &boudingBox;
+		return &boundingBox;
 	}
 
 protected:
 	bool paint(SDL_Renderer* pRenderer, int x, int y);
 
 	Rect rect;
-	Rect boudingBox;
+	Rect boundingBox;
 
 	// int x;
 	// int y;

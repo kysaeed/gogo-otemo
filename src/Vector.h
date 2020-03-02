@@ -16,12 +16,12 @@ public:
 		this->y = y;
 	}
 
-	inline float getX()
+	inline float getX() const
 	{
 		return x;
 	}
 
-	inline float getY()
+	inline float getY() const
 	{
 		return y;
 	}

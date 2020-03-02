@@ -2,7 +2,6 @@
 #define __ACOTR_H__
 
 #include <string>
-// #include <list>
 #include <vector>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -10,6 +9,7 @@
 
 #include "GameObject.h"
 #include "Sprite.h"
+#include "ActorImageCellData.h"
 #include "Animation.h"
 #include "AnimationTable.h"
 
@@ -43,7 +43,7 @@ public:
 
 	// todo:
 protected:
-	// Animation animation;
+	std::vector <ActorImageCellData *> cells;
 	AnimationTable animations;
 };
 

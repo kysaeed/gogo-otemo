@@ -18,7 +18,7 @@ bool Cat::initialize(SDL_Renderer* pRenderer)
 
 
 	setClipSize(128, 128);
-	// boudingBox = Rect(44, 20, 37, 64);
+	// boundingBox = Rect(44, 20, 37, 64);
 	load("./data/koneko.oan");
 
 	isDeadState = false;
