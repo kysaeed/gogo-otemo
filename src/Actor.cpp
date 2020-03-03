@@ -10,9 +10,6 @@ Actor::Actor()
 	// x = 128;
 	// y = 128;
 
-
-	state = none;
-
 	setClipSize(DefaultWidth, DefaultHeight);
 }
 
@@ -58,6 +55,17 @@ bool Actor::render(SDL_Renderer* pRenderer)
 	return paint(pRenderer, rect.getX(), rect.getY());
 }
 
+void Actor::clean()
+{
+	for (std::vector <ActorImageCellData *>::iterator it = cells.begin(); it != cells.end(); it++) {
+		if ((*it) != nullptr) {
+			delete (*it);
+			(*it) = nullptr;
+		}
+	}
+	Sprite::clean();
+}
+
 bool Actor::load(const std::string &filename)
 {
 	SDL_RWops* file = SDL_RWFromFile(filename.c_str(), "r");
@@ -89,7 +97,14 @@ bool Actor::load(const std::string &filename)
 	return true;
 }
 
-// void Actor::clean()
-// {
-//   sprite->clean();
-// }
+Rect *Actor::getBoundingBox()
+{
+	ActorImageCellData* cell = cells[clipIndex];
+	if (cell == nullptr) {
+		return Sprite::getBoundingBox();
+	}
+	if (cell->getBoundingBox()->isEmpty()) {
+		return Sprite::getBoundingBox();
+	}
+	return cell->getBoundingBox();
+}

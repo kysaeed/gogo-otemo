@@ -24,7 +24,11 @@ public:
 	virtual bool onFrame();
 	virtual void onAnimationEnd(int animationNumber);
 	virtual bool render(SDL_Renderer* pRenderer);
+	virtual void clean();
 	bool load(const std::string &filename);
+
+	virtual Rect *getBoundingBox();
+
 
 	virtual bool loadAnimationFile(const std::string &filename)
 	{
@@ -33,15 +37,6 @@ public:
 
 	static const int DefaultWidth;
 	static const int DefaultHeight;
-
-	enum State {
-		none,
-		move,
-	};
-
-	State state;
-
-	// todo:
 protected:
 	std::vector <ActorImageCellData *> cells;
 	AnimationTable animations;

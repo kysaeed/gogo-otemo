@@ -98,6 +98,17 @@ public:
 		height = h;
 	}
 
+	inline bool isEmpty() const
+	{
+		if (width == 0) {
+			return true;
+		}
+		if (height == 0) {
+			return true;
+		}
+		return false;
+	}
+
 	virtual bool intersect(Rect* otehr) const;
 
 	Rect getAppleidBodingBoxRect(const Rect* boundingBox);
