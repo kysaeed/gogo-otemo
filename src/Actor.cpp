@@ -47,12 +47,18 @@ void Actor::onAnimationEnd(int animationNumber)
 
 bool Actor::render(SDL_Renderer* pRenderer)
 {
+	Vector position = getAnimatedPosition();
+	return paint(pRenderer, position.getX(), position.getY());
+}
+
+Vector Actor::getAnimatedPosition()
+{
 	if (!animations.getCurrentAnimation().isNull()) {
 		AnimationFrame frame = animations.getCurrentAnimation().getCurrentFrame();
-		return paint(pRenderer, rect.getX() + frame.getX(), rect.getY() + frame.getY());
+		return Vector(rect.getX() + frame.getX(), rect.getY() + frame.getY());
 	}
 
-	return paint(pRenderer, rect.getX(), rect.getY());
+	return Vector(rect.getX(), rect.getY());
 }
 
 void Actor::clean()
@@ -100,7 +106,6 @@ bool Actor::load(const std::string &filename)
 ActorImageCellMountPoint *Actor::getMoutPoint(int id)
 {
 	ActorImageCellData* cell = getCellData();
-	std::cout << "cell : " << cell << std::endl;
 	if (cell == nullptr) {
 		return nullptr;
 	}

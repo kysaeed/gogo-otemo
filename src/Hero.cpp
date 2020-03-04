@@ -67,15 +67,17 @@ bool Hero::onFrame()
 	if (Pad::getInstance()->getTrigger() & Pad::ButtonA) {
 		EyeBeam* e = (EyeBeam *) beamPool.pop();
 		if (e != NULL) {
-			Vector v(40, 24);
-
+			Vector position = getAnimatedPosition();
 			ActorImageCellMountPoint* p = getMoutPoint(1);
 			std::cout << "point addr : " << p << std::endl;
 			if (p != nullptr) {
 				std::cout << "  pos: " << p->getOffset().getX() << ", " << p->getOffset().getY() << std::endl;
-				v = p->getOffset();
+				e->getRect()->setPosition(position.getX() + p->getOffset().getX() - 32, position.getY() +
+										  p->getOffset().getY() - 32);
+			} else {
+				std::cout << "  pos: " << v.getX() << ", " << v.getY() << std::endl;
+				e->getRect()->setPosition(position.getX() - 32, position.getY() - 32);
 			}
-			e->getRect()->setPosition(getRect()->getX() + v.getX(), getRect()->getY() + v.getY());
 
 			Core::getInstance()->gatCurrentScene()->attach(e);
 		}

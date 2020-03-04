@@ -27,6 +27,8 @@ public:
 	virtual void clean();
 	bool load(const std::string &filename);
 
+	virtual Vector getAnimatedPosition();
+
 	virtual Rect *getBoundingBox();
 
 	ActorImageCellMountPoint *getMoutPoint(int id);
