@@ -9,12 +9,20 @@ public:
 	ActorImageCellMountPoint();
 	ActorImageCellMountPoint(int id, Vector offset);
 
-	inline int getId() { return id; }
-	inline const Vector& getOffset() { return offset; }
+	inline int getId()
+	{
+		return id;
+	}
+
+	inline const Vector&getOffset()
+	{
+		return offset;
+	}
 
 protected:
 	int id;
 	Vector offset;
-
 };
+
+
 #endif

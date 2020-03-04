@@ -12,8 +12,14 @@ class ActorImageCellData
 {
 public:
 	ActorImageCellData();
-	inline Rect* getBoundingBox() {
+	inline Rect *getBoundingBox()
+	{
 		return &boundingBox;
+	}
+
+	inline ActorImageCellMountPoint *getMoutPoint(int id)
+	{
+		return mountPoints[id];
 	}
 
 	virtual ~ActorImageCellData();
@@ -25,7 +31,8 @@ public:
 protected:
 	static const int MountPointsCount = 128;
 	Rect boundingBox;
-	std::vector<ActorImageCellMountPoint*> mountPoints;
+	std::vector <ActorImageCellMountPoint *> mountPoints;
 };
+
 
 #endif

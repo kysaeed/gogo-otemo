@@ -29,6 +29,12 @@ public:
 
 	virtual Rect *getBoundingBox();
 
+	ActorImageCellMountPoint *getMoutPoint(int id);
+
+	inline ActorImageCellData *getCellData()
+	{
+		return cells[clipIndex];
+	}
 
 	virtual bool loadAnimationFile(const std::string &filename)
 	{

@@ -97,9 +97,19 @@ bool Actor::load(const std::string &filename)
 	return true;
 }
 
+ActorImageCellMountPoint *Actor::getMoutPoint(int id)
+{
+	ActorImageCellData* cell = getCellData();
+	std::cout << "cell : " << cell << std::endl;
+	if (cell == nullptr) {
+		return nullptr;
+	}
+	return cell->getMoutPoint(id);
+}
+
 Rect *Actor::getBoundingBox()
 {
-	ActorImageCellData* cell = cells[clipIndex];
+	ActorImageCellData* cell = getCellData();
 	if (cell == nullptr) {
 		return Sprite::getBoundingBox();
 	}
