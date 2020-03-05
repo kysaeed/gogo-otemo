@@ -69,13 +69,10 @@ bool Hero::onFrame()
 		if (e != NULL) {
 			Vector position = getAnimatedPosition();
 			ActorImageCellMountPoint* p = getMoutPoint(1);
-			std::cout << "point addr : " << p << std::endl;
 			if (p != nullptr) {
-				std::cout << "  pos: " << p->getOffset().getX() << ", " << p->getOffset().getY() << std::endl;
 				e->getRect()->setPosition(position.getX() + p->getOffset().getX() - 32, position.getY() +
 										  p->getOffset().getY() - 32);
 			} else {
-				std::cout << "  pos: " << v.getX() << ", " << v.getY() << std::endl;
 				e->getRect()->setPosition(position.getX() - 32, position.getY() - 32);
 			}
 
